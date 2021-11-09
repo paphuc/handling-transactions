@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package employee;
+
+option go_package="github.com/paphuc/protocol-buffers/employee;employee";
+
+import "transaction/transaction.proto";
+
+service Employee {
+  rpc InsertEmployee (InsertEmployeeRequest) returns (InsertEmployeeResponse) {}
+  rpc InsertEmployeeDetail (InsertEmployeeDetailRequest) returns (InsertEmployeeDetailResponse) {}
+}
+
+message EmployeeDetail {
+    int32 assignmentID = 1;
+    string salary = 2;
+    string homeAddress = 3;
+    string title = 4;
+    string employeeID = 5;
+}
+
+message InsertEmployeeRequest {
+  string correlationID = 1;
+  string firstName = 2;
+  string lastName = 3;
+  transaction.BeginTxResponse beginTxRes = 6;
+}
+
+message InsertEmployeeDetailRequest {
+  string correlationID = 1;
+  string txRandomID = 2;
+  repeated EmployeeDetail EmployeeDetails = 3;
+  transaction.BeginTxResponse beginTxRes = 6;
+}
+
+message InsertEmployeeResponse {
+  int32 rowAffected = 1;
+  string id = 2;
+}
+
+message InsertEmployeeDetailResponse {
+  int32 rowAffected = 1;
+  string id = 2;
+}

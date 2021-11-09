@@ -1,0 +1,14 @@
+server:
+  g_port: 9080
+database:
+  driver: "postgres"
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  db_name: "postgres"
+  password: "123456"
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+  max_retries: 3

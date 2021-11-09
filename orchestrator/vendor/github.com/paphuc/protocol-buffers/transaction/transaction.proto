@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package transaction;
+
+option go_package="github.com/paphuc/protocol-buffers/transaction;transaction";
+
+service Transaction {
+  rpc BeginTx(BeginTxRequest) returns (BeginTxResponse) {}
+  rpc Commit(CommonTxDoActionRequest) returns (CommonTxResponse) {}
+  rpc Rollback(CommonTxDoActionRequest) returns (CommonTxResponse) {}
+}
+
+message BeginTxResponse {
+  bool isRenew = 1;
+  string txRandomID = 2;
+}
+
+message BeginTxRequest {
+  string correlationID = 1;
+}
+
+message CommonTxDoActionRequest {
+  string correlationID = 1;
+  BeginTxResponse beginTxRes = 2;
+}
+
+message CommonTxResponse {
+  bool ok = 1;
+}

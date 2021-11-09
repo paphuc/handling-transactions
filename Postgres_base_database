@@ -1,0 +1,145 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.0
+-- Dumped by pg_dump version 14.0
+
+-- Started on 2021-11-09 16:38:01
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 2 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 3323 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 212 (class 1259 OID 16421)
+-- Name: assignment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.assignment (
+    id bigint NOT NULL,
+    start_date date,
+    end_date date
+);
+
+
+ALTER TABLE public.assignment OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16413)
+-- Name: employee; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employee (
+    id text NOT NULL,
+    first_name text,
+    last_name text
+);
+
+
+ALTER TABLE public.employee OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16418)
+-- Name: employee_detail; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.employee_detail (
+    assignment_id text,
+    employee_id text,
+    salary text,
+    home_address text,
+    title text
+);
+
+
+ALTER TABLE public.employee_detail OWNER TO postgres;
+
+--
+-- TOC entry 3317 (class 0 OID 16421)
+-- Dependencies: 212
+-- Data for Name: assignment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.assignment (id, start_date, end_date) FROM stdin;
+8	2022-01-02	2023-01-02
+6	2022-01-02	2023-01-02
+\.
+
+
+--
+-- TOC entry 3315 (class 0 OID 16413)
+-- Dependencies: 210
+-- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employee (id, first_name, last_name) FROM stdin;
+a04130da-2400-4d2e-a851-fecd78b6922b	acd	b
+8bb3d799-b48c-4ea7-b8f1-c195d24d3b60	acd	b
+\.
+
+
+--
+-- TOC entry 3316 (class 0 OID 16418)
+-- Dependencies: 211
+-- Data for Name: employee_detail; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.employee_detail (assignment_id, employee_id, salary, home_address, title) FROM stdin;
+6	a04130da-2400-4d2e-a851-fecd78b6922b		A Street132	Senior Engineer
+8	8bb3d799-b48c-4ea7-b8f1-c195d24d3b60		A Street132	Senior Engineer
+\.
+
+
+--
+-- TOC entry 3175 (class 2606 OID 16425)
+-- Name: assignment assignment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.assignment
+    ADD CONSTRAINT assignment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3173 (class 2606 OID 16477)
+-- Name: employee employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.employee
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (id);
+
+
+-- Completed on 2021-11-09 16:38:01
+
+--
+-- PostgreSQL database dump complete
+--
+
